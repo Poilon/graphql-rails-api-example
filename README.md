@@ -1,24 +1,44 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This example has made it live through these commands
 
-Things you may want to cover:
+```bash
+rails new graphql-rails-api-example --database=postgresql --api
+```
 
-* Ruby version
+Create the DB
+```bash
+cd graphql-rails-api-example
+rails db:create
+```
 
-* System dependencies
 
-* Configuration
+then added the gems to the Gemfile
+```ruby
+gem 'graphql'
+gem 'graphql-rails-api'
+```
 
-* Database creation
+Install the gems
+```bash
+bundle
+```
 
-* Database initialization
 
-* How to run the test suite
+Install graphql_rails_api
+```bash
+rails generate graphql_rails_api:install
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Generate resources
 
-* Deployment instructions
+```bash
+rails generate graphql_resource user email:string first_name:string last_name:string authentication_token:string
+rails generate graphql_resource hdd ref:string
+rails generate graphql_resource computer ref:string description:text belongs_to:user has_many:hdds
+rails generate graphql_resource motherboard ref:string belongs_to:computer
+rails generate graphql_resource graphics_card ref:string belongs_to:computer
+rails generate graphql_resource component_tag code:string many_to_many:motherboards many_to_many:graphics_cards many_to_many:hdds
+```
 
-* ...
+Done !
